@@ -1,8 +1,25 @@
+# build output
 build
 dist
+
+# media uploads
 /media
+
+# dependencies
 node_modules
+
+# macOS trash
 .DS_Store
+
+# env files
 .env
+.env.local
+
+# Next.js
 .next
+
+# Vercel
 .vercel
+
+# Log files
+*.log
