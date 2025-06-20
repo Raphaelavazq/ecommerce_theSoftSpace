@@ -6,7 +6,11 @@ import CategoryCard from './CategoryCard'
 
 import classes from './index.module.scss'
 
-const Categories = ({ categories }: { categories: Category[] }) => {
+const Categories = ({ categories }: { categories: Category[] | null }) => {
+  if (!categories || categories.length === 0) {
+    return <div>No categories found.</div>
+  }
+
   return (
     <section className={classes.container}>
       <div className={classes.titleWrapper}>

@@ -35,13 +35,23 @@
 }
 
 .appearance--primary {
-  background-color: var(--theme-elevation-1000);
-  color: var(--theme-elevation-0);
+  background-color: var(--theme-primary); 
+  color: var(--theme-bg);                 // Cosmic Latte text for contrast
+}
+
+.appearance--primary:hover {
+  background-color: var(--color-china-rose);
+   color: var(--theme-bg);  // China Rose
 }
 
 .appearance--secondary {
-  background-color: transparent;
-  box-shadow: inset 0 0 0 1px var(--theme-elevation-1000);
+  background-color: var(--color-china-rose); // Cherry Blossom
+  color: var(--theme-bg);              // English Violet text
+}
+
+.appearance--secondary:hover {
+  background-color: var(--color-english-violet); 
+  color: var(--theme-bg); // China Rose
 }
 
 .primary--invert {
@@ -69,5 +79,42 @@
       line-height: inherit;
       font-size: inherit;
     }
+  }
+}
+
+// Shop Now button
+.shopNow {
+  background: var(--button-shopnow-bg);
+  color: var(--button-shopnow-text);
+  border: none;
+
+  &:hover {
+    background: var(--button-shopnow-hover-bg);
+    color: var(--button-shopnow-hover-text);
+    
+  }
+}
+
+// View on GitHub button
+.github {
+  background: var(--button-github-bg);
+  color: var(--button-github-text);
+  border: none;
+
+  &:hover {
+    background: var(--button-github-hover-bg);
+    color: var(--button-github-hover-text);
+  }
+}
+
+// Login button
+.login {
+  background: var(--button-login-bg);
+  color: var(--button-login-text);
+  border: none;
+
+  &:hover {
+    background: var(--button-login-hover-bg);
+    color: var(--button-login-hover-text);
   }
 }

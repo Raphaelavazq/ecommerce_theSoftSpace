@@ -515,6 +515,4 @@ export interface Footer {
 }
 
 
-declare module 'payload' {
-  export interface GeneratedTypes extends Config {}
-}
+// Removed redeclaration of GeneratedTypes to avoid duplicate identifier error.

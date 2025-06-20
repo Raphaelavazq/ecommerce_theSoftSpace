@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import next from 'next'
 import nextBuild from 'next/dist/build'
@@ -6,7 +7,8 @@ import payload from 'payload'
 
 import { seed } from './payload/seed'
 
-import 'dotenv/config'
+dotenv.config({ path: '.env.local' })
+// ...existing code...
 
 const app = express()
 

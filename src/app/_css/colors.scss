@@ -1,6 +1,13 @@
 // Keep these in sync with the colors exported in '../cssVariables.js'
 
 :root {
+
+  --color-cosmic-latte: #FEF6E5;        // Background
+  --color-english-violet: #533F5B;      // Typography
+  --color-apricot: #FABA9E;             // Primary Accent
+  --color-cherry-blossom: #F7AAB0;      // Secondary Accent
+  --color-china-rose: #AE697C;          // Supporting Accent
+  
   --color-base-0: rgb(255, 255, 255);
   --color-base-50: rgb(245, 245, 245);
   --color-base-100: rgb(235, 235, 235);

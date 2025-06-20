@@ -27,15 +27,7 @@
 }
 
 html {
-  @extend %body;
   background: var(--theme-bg);
-  -webkit-font-smoothing: antialiased;
-  opacity: 0;
-
-  &[data-theme=dark],
-  &[data-theme=light] {
-    opacity: initial;
-  }
 }
 
 html,
@@ -45,13 +37,9 @@ body,
 }
 
 body {
+  background: var(--theme-bg);
+  color: var(--theme-text);
   font-family: var(--font-jost);
-  margin: 0;
-  padding: 0;
-  color: var(--color-dark-500);
-
-  display: flex;
-  flex-flow: column;
 }
 
 .main {
@@ -110,17 +98,10 @@ ol {
 }
 
 a {
-  color: var(--color-dark-500);
-  text-decoration: none;
+  color: var(--link-color);
 
-  &:focus {
-    opacity: .8;
-    outline: none;
-  }
-
-  &:active {
-    opacity: .7;
-    outline: none;
+  &:hover {
+    color: var(--link-hover-color);
   }
 }
 

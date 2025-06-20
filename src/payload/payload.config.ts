@@ -37,7 +37,7 @@ const generateTitle: GenerateTitle = () => {
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 dotenv.config({
-  path: path.resolve(__dirname, '../../.env'),
+  path: path.resolve(__dirname, '../../.env.local'), // <-- change to .env.local
 })
 
 export default buildConfig({

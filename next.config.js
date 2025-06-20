@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const ContentSecurityPolicy = require('./csp')
 const redirects = require('./redirects')
 
 const nextConfig = {
@@ -33,15 +32,21 @@ const nextConfig = {
       })
     }
 
-    // Set the `Content-Security-Policy` header as a security measure to prevent XSS attacks
-    // It works by explicitly whitelisting trusted sources of content for your website
-    // This will block all inline scripts and styles except for those that are allowed
     headers.push({
       source: '/(.*)',
       headers: [
         {
           key: 'Content-Security-Policy',
-          value: ContentSecurityPolicy,
+          value: `
+              default-src 'self';
+              connect-src 'self' http://localhost:3001 https://checkout.stripe.com https://maps.googleapis.com;
+              img-src 'self' data: https://* http://*;
+              script-src 'self' 'unsafe-eval' 'unsafe-inline';
+              style-src 'self' 'unsafe-inline';
+              font-src 'self' data:;
+            `
+            .replace(/\s{2,}/g, ' ')
+            .trim(),
         },
       ],
     })

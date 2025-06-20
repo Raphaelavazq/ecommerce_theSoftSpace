@@ -1,4 +1,43 @@
-[data-theme=light] {
+@import './colors.scss';
+
+[data-theme="light"] {
+  --theme-bg: var(--color-cosmic-latte);
+  --theme-text: var(--color-english-violet);
+
+  --theme-primary: var(--color-english-violet); // Buttons & accents
+  --theme-primary-hover: var(--color-china-rose); // Button hover
+  --theme-secondary: var(--color-cherry-blossom);
+  --theme-accent: var(--color-china-rose);
+
+  --button-primary-bg: var(--theme-primary);
+  --button-primary-hover-bg: var(--theme-primary-hover);
+  --button-secondary-bg: var(--theme-secondary);
+  --button-secondary-hover-bg: var(--theme-accent);
+
+  --button-shopnow-bg: var(--color-english-violet);
+  --button-shopnow-text: var(--color-cosmic-latte);
+  --button-shopnow-hover-bg: var(--color-cherry-blossom);
+  --button-shopnow-hover-text: var(--color-cosmic-latte);
+
+  --button-github-bg: var(--color-cherry-blossom);
+  --button-github-text: var(--color-cosmic-latte);
+  --button-github-hover-bg: var(--color-english-violet);
+  --button-github-hover-text: var(--color-cosmic-latte);
+
+  --button-login-bg: var(--color-english-violet);
+  --button-login-text: var(--color-cosmic-latte);
+  --button-login-hover-bg: var(--color-cherry-blossom);
+  --button-login-hover-text: var(--color-cosmic-latte);
+
+  --button-violet-bg: var(--color-english-violet);
+  --button-violet-hover-bg: var(--color-cherry-blossom);
+  --button-cherry-bg: var(--color-cherry-blossom);
+  --button-cherry-hover-bg: var(--color-english-violet);
+  --button-text: var(--color-cosmic-latte);
+
+  --link-color: var(--theme-primary);
+  --link-hover-color: var(--theme-primary-hover);
+
   --theme-success-50: var(--color-success-50);
   --theme-success-100: var(--color-success-100);
   --theme-success-150: var(--color-success-150);
@@ -81,11 +120,6 @@
   --theme-elevation-950: var(--color-base-950);
   --theme-elevation-1000: var(--color-base-1000);
 
-  --theme-bg: var(--theme-elevation-0);
-  --theme-input-bg: var(--theme-elevation-50);
-  --theme-text: var(--theme-elevation-750);
-  --theme-border-color: var(--theme-elevation-150);
-
   color-scheme: light;
   color: var(--theme-text);
 
@@ -117,7 +151,7 @@
   }
 }
 
-[data-theme=dark] {
+[data-theme="dark"] {
   --theme-elevation-0: var(--color-base-1000);
   --theme-elevation-50: var(--color-base-950);
   --theme-elevation-100: var(--color-base-900);
