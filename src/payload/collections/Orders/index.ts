@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { admins } from '../../access/admins'
 import { adminsOrLoggedIn } from '../../access/adminsOrLoggedIn'
+import { checkRole } from '../Users/checkRole'
 import { adminsOrOrderedBy } from './access/adminsOrOrderedBy'
 import { clearUserCart } from './hooks/clearUserCart'
 import { populateOrderedBy } from './hooks/populateOrderedBy'
@@ -73,4 +74,13 @@ export const Orders: CollectionConfig = {
       ],
     },
   ],
+}
+
+export const Header = {
+  slug: 'header',
+  access: {
+    read: () => true,
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+  },
+  // ...existing fields and config...
 }

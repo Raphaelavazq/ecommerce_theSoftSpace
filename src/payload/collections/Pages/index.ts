@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { admins } from '../../access/admins'
 import { Archive } from '../../blocks/ArchiveBlock'
 import { CallToAction } from '../../blocks/CallToAction'
 import { Content } from '../../blocks/Content'
@@ -8,7 +7,7 @@ import { MediaBlock } from '../../blocks/MediaBlock'
 import { hero } from '../../fields/hero'
 import { slugField } from '../../fields/slug'
 import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
-import { adminsOrPublished } from './access/adminsOrPublished'
+import { checkRole } from '../Users/checkRole'
 import { revalidatePage } from './hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
@@ -16,11 +15,7 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: doc => {
-      return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api/preview?url=${encodeURIComponent(
-        `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/${doc.slug !== 'home' ? doc.slug : ''}`,
-      )}&secret=${process.env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
-    },
+    preview: doc => `/pages/${doc?.slug || 'home'}`,
   },
   hooks: {
     afterChange: [revalidatePage],
@@ -30,10 +25,10 @@ export const Pages: CollectionConfig = {
     drafts: true,
   },
   access: {
-    read: adminsOrPublished,
-    update: admins,
-    create: admins,
-    delete: admins,
+    read: () => true, // Anyone can read
+    create: ({ req: { user } }) => checkRole(['admin'], user),
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+    delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
   fields: [
     {

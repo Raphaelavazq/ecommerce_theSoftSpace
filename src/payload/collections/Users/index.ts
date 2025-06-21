@@ -1,8 +1,7 @@
+import type { Access } from 'payload/config'
 import type { CollectionConfig } from 'payload/types'
 
 import { admins } from '../../access/admins'
-import { anyone } from '../../access/anyone'
-import adminsAndUser from './access/adminsAndUser'
 import { checkRole } from './checkRole'
 import { customerProxy } from './endpoints/customer'
 import { createStripeCustomer } from './hooks/createStripeCustomer'
@@ -11,6 +10,12 @@ import { loginAfterCreate } from './hooks/loginAfterCreate'
 import { resolveDuplicatePurchases } from './hooks/resolveDuplicatePurchases'
 import { CustomerSelect } from './ui/CustomerSelect'
 
+const adminsOrSelf: Access = ({ req: { user }, id }) => {
+  if (user?.roles?.includes('admin')) return true
+  if (user && user.id === id) return true
+  return false
+}
+
 const Users: CollectionConfig = {
   slug: 'users',
   admin: {
@@ -18,11 +23,10 @@ const Users: CollectionConfig = {
     defaultColumns: ['name', 'email'],
   },
   access: {
-    read: adminsAndUser,
-    create: anyone,
-    update: adminsAndUser,
+    read: adminsOrSelf,
+    update: adminsOrSelf,
+    create: admins,
     delete: admins,
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
   },
   hooks: {
     beforeChange: [createStripeCustomer],
@@ -52,22 +56,16 @@ const Users: CollectionConfig = {
       hasMany: true,
       defaultValue: ['customer'],
       options: [
-        {
-          label: 'admin',
-          value: 'admin',
-        },
-        {
-          label: 'customer',
-          value: 'customer',
-        },
+        { label: 'admin', value: 'admin' },
+        { label: 'customer', value: 'customer' },
       ],
       hooks: {
         beforeChange: [ensureFirstUserIsAdmin],
       },
       access: {
-        read: admins,
-        create: admins,
-        update: admins,
+        read: admins, // Only admins can read roles
+        create: admins, // Only admins can set roles on create
+        update: admins, // Only admins can update roles
       },
     },
     {

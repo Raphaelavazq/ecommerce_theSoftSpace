@@ -1,12 +1,12 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { admins } from '../../access/admins'
 import { Archive } from '../../blocks/ArchiveBlock'
 import { CallToAction } from '../../blocks/CallToAction'
 import { Content } from '../../blocks/Content'
 import { MediaBlock } from '../../blocks/MediaBlock'
 import { slugField } from '../../fields/slug'
 import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
+import { checkRole } from '../Users/checkRole'
 import { checkUserPurchases } from './access/checkUserPurchases'
 import { beforeProductChange } from './hooks/beforeChange'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
@@ -35,9 +35,9 @@ const Products: CollectionConfig = {
   },
   access: {
     read: () => true,
-    create: admins,
-    update: admins,
-    delete: admins,
+    create: ({ req: { user } }) => checkRole(['admin'], user),
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+    delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
   fields: [
     {

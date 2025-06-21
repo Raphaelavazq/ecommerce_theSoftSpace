@@ -19,13 +19,8 @@ const jost = Jost({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <InitTheme />
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      </head>
-      <body className={jost.variable}>
+    <html lang="en" className={jost.variable}>
+      <body>
         <Providers>
           <AdminBar />
           {/* @ts-expect-error */}

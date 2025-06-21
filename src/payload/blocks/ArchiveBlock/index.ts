@@ -1,5 +1,6 @@
 import type { Block } from 'payload/types'
 
+import { checkRole } from '../../collections/Users/checkRole'
 import richText from '../../fields/richText'
 
 export const Archive: Block = {
@@ -97,4 +98,13 @@ export const Archive: Block = {
       },
     },
   ],
+}
+
+export const Header = {
+  slug: 'header',
+  access: {
+    read: () => true,
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+  },
+  // ...existing fields and config...
 }
